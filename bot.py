@@ -40,7 +40,11 @@ async def on_ready():
     if channel:
         embed = discord.Embed(
             title="🌍 Where are you from?",
-            description="React with the corresponding flag to select your country!",
+            description="React with the corresponding flag to select your country!\n\n"
+                        + "\n".join([f"{emoji} - {role_mention}" 
+                                      for emoji, role_id in roles.items()
+                                      if (role := channel.guild.get_role(role_id))
+                                      for role_mention in [f"<@&{role_id}>"]]),  
             color=discord.Color.blue()
         )
         message = await channel.send(embed=embed)
@@ -65,4 +69,4 @@ async def on_reaction_add(reaction, user):
         else:
             print(f'No role associated with {str(reaction.emoji)}.')
 
-bot.run('Your_bot_token') # https://discord.com/developers/applications/ insert your Bot-Token
+bot.run('YOUR_BOT_TOKENE')  #  https://discord.com/developers/applications/ Replace with your actual bot token
