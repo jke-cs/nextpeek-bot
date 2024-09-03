@@ -7,4 +7,6 @@ Edit the script as mentioned in the script
 ## Run
 
 pip install discord.py
+
+
 python bot.py
