@@ -36,9 +36,13 @@ roles = {
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
-    await bot.change_presence(activity=discord.Game(name="i love roles")) #Change Presence Status of your Bot
+    await bot.change_presence(activity=discord.Game(name="i love roles"))  # Change Presence Status of your Bot
     channel = bot.get_channel(channel_id)
     if channel:
+        # Send the @everyone mention when the bot starts
+        await channel.send('@everyone React with your country\'s flag to get your role.')
+        
+        # Send the message for reactions
         message = await channel.send('Where are you from? React with the corresponding flag!')
         for reaction in roles.keys():
             await message.add_reaction(reaction)
@@ -68,4 +72,4 @@ async def on_reaction_add(reaction, user):
             else:
                 print(f'No role associated with {str(reaction.emoji)}.')
 
-bot.run('CHANGE_ME')
+bot.run('CHANGE_ME') # https://discord.com/developers/applications/ insert your Bot-Token
